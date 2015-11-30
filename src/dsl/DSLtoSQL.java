@@ -99,8 +99,8 @@ public class DSLtoSQL {
             while(rs.next()){
                 arrString = new ArrayList<String>();
                 for (int i = 1; i <= columnsNumber; i++){
-//                    System.out.println(rs.getString(i));
-                    arrString.add(rs.getString(i));
+                    System.out.println(rs.getString(i));
+//                    arrString.add(rs.getString(i));
                 }
                 result.add(arrString);
             }
@@ -134,33 +134,74 @@ public class DSLtoSQL {
             pw.println("<!DOCTYPE html>");
             pw.println("<html>");
             pw.println("<head>");
-            pw.println("<title>Score Finder</title>");
+            pw.println("<title>Transkrip Mahasiswa</title>");
             pw.println("</head>");
             pw.println("<body>");
-            pw.println("<table dir=\"ltr\" width=\"500\" border=\"1\" summary=\"purpose/structure for speech output\">");
-            pw.println("	<caption>Berikut adalah hasil eksekusi query " + Query);
-            pw.println("	</caption>");
-            pw.println("	<colgroup width=\"50%\" />");
-            pw.println("	<colgroup id=\"colgroup\" class=\"colgroup\" align=\"center\" ");
-            pw.println("			valign=\"middle\" title=\"title\" width=\"1*\" ");
-            pw.println("			span=\"2\" style=\"background:#ddd;\" />");
-            pw.println("	<thead>");
-            pw.println("		<tr>");
-            for(int i = 0; i < columnName.size(); i++){
-                pw.println("			<th scope=\"col\">"+columnName.get(i)+"</th>");
-            }
-            pw.println("		</tr>");
-            pw.println("	</thead>");
-            pw.println("	<tbody>");
-            for(int i = 0; i < result.size(); i++){
+            if(result.size()>0){
+                pw.println("<h2 align=\"center\">Display Status Mahasiswa</h2><hr align='center' width='800'>");
+                pw.println("<table align=\"center\" dir=\"ltr\" width=\"500\" border=\"0\" >");
+                pw.println("<tr>");
+                pw.println("<td colspan=\"1\" rowspan=\"1\" >NIM/No Reg/Nama</td>");
+                pw.println("<td colspan=\"1\" rowspan=\"1\" >:</td>");
+                pw.println("<td colspan=\"1\" rowspan=\"1\" >"+result.get(0).get(0)+" / "+result.get(0).get(1)+" / "+result.get(0).get(2)+"</td>");
+                pw.println("</tr>");
+                pw.println("<tr >");
+                pw.println("<td colspan=\"1\" rowspan=\"1\" >NIP/Dosen Wali</td>");
+                pw.println("<td colspan=\"1\" rowspan=\"1\" >:</td>");
+                pw.println("<td colspan=\"1\" rowspan=\"1\" >"+result.get(0).get(6)+" / "+result.get(0).get(7)+"</td>");
+                pw.println("</tr>");
+                pw.println("<tr >");
+                pw.println("<td colspan=\"1\" rowspan=\"1\" >Fakultas</td>");
+                pw.println("<td colspan=\"1\" rowspan=\"1\" >:</td>");
+                pw.println("<td colspan=\"1\" rowspan=\"1\" >"+result.get(0).get(8)+"</td>");
+                pw.println("</tr>");
+                pw.println("<tr >");
+                pw.println("<td colspan=\"1\" rowspan=\"1\" >Program Studi</td>");
+                pw.println("<td colspan=\"1\" rowspan=\"1\" >:</td>");
+                pw.println("<td colspan=\"1\" rowspan=\"1\" >"+result.get(0).get(9)+"</td>");
+                pw.println("</tr>");
+                pw.println("<tr >");
+                pw.println("<td colspan=\"1\" rowspan=\"1\" >Alamat / Kode Pos</td>");
+                pw.println("<td colspan=\"1\" rowspan=\"1\" >:</td>");
+                pw.println("<td colspan=\"1\" rowspan=\"1\" >"+result.get(0).get(3)+" / "+result.get(0).get(4)+"</td>");
+                pw.println("</tr>");
+                pw.println("<tr >");
+                pw.println("<td colspan=\"1\" rowspan=\"1\" >Total SKS</td>");
+                pw.println("<td colspan=\"1\" rowspan=\"1\" >:</td>");
+                pw.println("<td colspan=\"1\" rowspan=\"1\" >"+result.get(0).get(10)+"</td>");
+                pw.println("</tr>");
+                pw.println("</table>");
+                pw.println("<table align=\"center\" dir=\"ltr\" width=\"500\" border=\"2\" >");
+                pw.println("<h3 align=\"center\"> Transkrip Nilai Mahasiswa");
+                pw.println("</h3>");
+//            pw.println("	<caption>Berikut adalah hasil eksekusi query : ");
+//            pw.println(Query);
+//            pw.println("<br>");
+//            pw.println("<br>");
+//            pw.println("<br>");
+//            pw.println("	</caption>");
+                pw.println("	<thead>");
                 pw.println("		<tr>");
-                for(int j = 0; j < result.get(i).size(); j++){
-                    pw.println("			<td>"+result.get(i).get(j)+"</td>");
+                for(int i = 11; i < columnName.size(); i++){
+                    pw.println("			<th scope=\"col\">"+columnName.get(i)+"</th>");
                 }
                 pw.println("		</tr>");
+                pw.println("	</thead>");
+                pw.println("	<tbody>");
+                for(int i = 0; i < result.size(); i++){
+                    pw.println("		<tr>");
+                    for(int j = 11; j < result.get(i).size(); j++){
+                        pw.println("			<td>"+result.get(i).get(j)+"</td>");
+                    }
+                    pw.println("		</tr>");
+                }
+                pw.println("	</tbody>");            
+                pw.println("</table>");
             }
-            pw.println("	</tbody>");            
-            pw.println("</table>");
+            else{
+                pw.println("<h1 align=\"center\"> Hasil Query Kosong");
+                pw.println("</h1>");
+            }
             pw.println("</body>");
             pw.println("</html>");
 
@@ -171,27 +212,27 @@ public class DSLtoSQL {
             pw.close();
 
             //Close the File Writer
-            fw.close(); 
-            } catch (IOException ex) {
-                ex.printStackTrace();
-            }
+            fw.close();
+            System.out.println("HTML created in D: ");
+        } catch (IOException ex) {
+            ex.printStackTrace();
+        }
     }
     public static void main(String argv[]){
-        Transkrip t = new Transkrip("nim:13512081 semester:2 dengan_syarat nilai:ab");
-        System.out.println(t.getNim());
-        System.out.println(t.getNilai());
-        System.out.println(t.getSKS());
-        System.out.println(t.getSemesterAwal());
-        System.out.println(t.getSemesterAkhir());
-        System.out.println(Arrays.toString(t.getKodeKuliah()));
+        Transkrip t = new Transkrip("nim:13512098 semester:2 dengan_syarat nilai:ab");
+//        System.out.println(t.getNim());
+//        System.out.println(t.getNilai());
+//        System.out.println(t.getSKS());
+//        System.out.println(t.getSemesterAwal());
+//        System.out.println(t.getSemesterAkhir());
+//        System.out.println(Arrays.toString(t.getKodeKuliah()));
         /*t.setNim("13512098");
         t.setSemesterAwal(1);
         t.setNilai("A");
         t.setSKS(3);*/
-
-//        System.out.println(dslToSQL(t));
         DSLtoSQL dts = new DSLtoSQL();
-        dts.writeToExternalFile("SELECT * FROM mahasiswa,mata_kuliah,mengambil WHERE mahasiswa.NIM='13512098' AND mahasiswa.nim=mengambil.nim AND mata_kuliah.kode_matkul=mengambil.kode_matkul");        
         System.out.println(dslToSQL(t));
+//        dts.writeToExternalFile("SELECT * FROM mahasiswa,mata_kuliah,mengambil WHERE mahasiswa.NIM='13512098' AND mahasiswa.nim=mengambil.nim AND mata_kuliah.kode_matkul=mengambil.kode_matkul");
+        dts.writeToExternalFile(dslToSQL(t));
     }
 }
