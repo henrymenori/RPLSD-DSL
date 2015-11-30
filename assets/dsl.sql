@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 4.2.7.1
+-- version 4.3.11
 -- http://www.phpmyadmin.net
 --
 -- Host: 127.0.0.1
--- Generation Time: Nov 30, 2015 at 10:43 AM
--- Server version: 5.6.20
--- PHP Version: 5.5.15
+-- Generation Time: Nov 30, 2015 at 04:06 PM
+-- Server version: 5.6.24
+-- PHP Version: 5.6.8
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 SET time_zone = "+00:00";
@@ -45,8 +45,11 @@ CREATE TABLE IF NOT EXISTS `mahasiswa` (
 --
 
 INSERT INTO `mahasiswa` (`nim`, `no_reg`, `nama`, `alamat`, `kode_pos`, `semester`, `nip_wali`, `dosen_wali`, `fakultas`, `program_studi`, `total_SKS`) VALUES
+('13512002', '78945612', 'Eldwin Christian', 'Kebon Bibit Barat I 52', '32145', 7, '1709195610123477', 'Bayu Hendrojoyo', 'STEI', 'Teknik Informatika', 120),
 ('13512009', '12103350', 'Rita Sarah', 'Tubagus Ismail 7 no 15', '40135', 7, '197701272008012011', 'Ayu Purwarianti', 'STEI', 'Teknik Informatika', 115),
-('13512098', '13512098', 'William Stefan Hartono', 'Jl. Ciumbuleuit no. 47', '40141', 7, '195210011978031002', 'Munawar Ahmad Z.A.', 'STEI', 'Teknik Informatika', 124);
+('13512024', '13141522', 'Riady Sastra Kusuma', 'Kebon Bunga Indah No. 7', '33123', 6, '140519753716', 'Gilang Husain Sukajadi', 'STEI', 'Teknik Informatika', 102),
+('13512082', '55661456', 'Marcelinus Henry Menori', 'Cimahi Barat VI No. 44', '33456', 8, '2212194588225566', 'Dodi Adi Cahyadi', 'STEI', 'Teknik Informatika', 140),
+('13512098', '12345678', 'William Stefan Hartono', 'Jl. Ciumbuleuit no. 47', '40141', 7, '195210011978031002', 'Munawar Ahmad Z.A.', 'STEI', 'Teknik Informatika', 124);
 
 -- --------------------------------------------------------
 
@@ -128,6 +131,12 @@ CREATE TABLE IF NOT EXISTS `mengambil` (
 --
 
 INSERT INTO `mengambil` (`nim`, `kode_matkul`, `nilai`, `status`) VALUES
+('13512002', 'EL1092', 'C', 'Lulus'),
+('13512002', 'IF2112', 'AB', 'Lulus'),
+('13512002', 'IF2220', 'AB', 'Lulus'),
+('13512002', 'IF3110', 'A', 'Lulus'),
+('13512002', 'IF3230', 'B', 'Lulus'),
+('13512002', 'IF4090', 'E', 'Tidak Lulus'),
 ('13512009', 'EL1092', 'C', 'Lulus'),
 ('13512009', 'FI1101', 'A', 'Lulus'),
 ('13512009', 'FI1201', 'A', 'Lulus'),
@@ -135,13 +144,39 @@ INSERT INTO `mengambil` (`nim`, `kode_matkul`, `nilai`, `status`) VALUES
 ('13512009', 'IF2112', 'BC', 'Lulus'),
 ('13512009', 'IF2120', 'C', 'Lulus'),
 ('13512009', 'IF2121', 'B', 'Lulus'),
+('13512024', 'FI1101', 'AB', 'Lulus'),
+('13512024', 'IF2110', 'A', 'Lulus'),
+('13512024', 'IF2211', 'B', 'Lulus'),
+('13512024', 'IF3240', 'AB', 'Lulus'),
+('13512024', 'IF3280', 'A', 'Lulus'),
+('13512082', 'FI1201', 'B', 'Lulus'),
+('13512082', 'IF2122', 'C', 'Lulus'),
+('13512082', 'IF3111', 'C', 'Lulus'),
+('13512082', 'IF4090', 'B', 'Lulus'),
+('13512082', 'IF4150', 'D', 'Tidak Lulus'),
+('13512082', 'KU2071', 'AB', 'Lulus'),
+('13512082', 'MA1101', 'A', 'Lulus'),
+('13512082', 'MA1201', 'A', 'Lulus'),
 ('13512098', 'EL1092', 'BC', 'Lulus'),
 ('13512098', 'FI1101', 'AB', 'Lulus'),
 ('13512098', 'FI1201', 'A', 'Lulus'),
 ('13512098', 'IF2110', 'C', 'Lulus'),
 ('13512098', 'IF2112', 'AB', 'Lulus'),
 ('13512098', 'IF2120', 'B', 'Lulus'),
-('13512098', 'IF2121', 'BC', 'Lulus');
+('13512098', 'IF2121', 'BC', 'Lulus'),
+('13512098', 'IF2122', 'B', 'Lulus'),
+('13512098', 'IF2130', 'A', 'Lulus'),
+('13512098', 'IF2250', 'B', 'Lulus'),
+('13512098', 'IF3110', 'AB', 'Lulus'),
+('13512098', 'IF3111', 'C', 'Lulus'),
+('13512098', 'IF3130', 'B', 'Lulus'),
+('13512098', 'IF3140', 'B', 'Lulus'),
+('13512098', 'IF4090', 'B', 'Lulus'),
+('13512098', 'IF4091', 'A', 'Lulus'),
+('13512098', 'IF4150', 'A', 'Lulus'),
+('13512098', 'KU1001', 'AB', 'Lulus'),
+('13512098', 'MA1101', 'A', 'Lulus'),
+('13512098', 'MA1201', 'AB', 'Lulus');
 
 --
 -- Indexes for dumped tables
@@ -151,19 +186,19 @@ INSERT INTO `mengambil` (`nim`, `kode_matkul`, `nilai`, `status`) VALUES
 -- Indexes for table `mahasiswa`
 --
 ALTER TABLE `mahasiswa`
- ADD PRIMARY KEY (`nim`), ADD KEY `nip_wali` (`nip_wali`), ADD KEY `dosen_wali` (`dosen_wali`), ADD KEY `fakultas` (`fakultas`), ADD KEY `program_studi` (`program_studi`);
+  ADD PRIMARY KEY (`nim`), ADD KEY `nip_wali` (`nip_wali`), ADD KEY `dosen_wali` (`dosen_wali`), ADD KEY `fakultas` (`fakultas`), ADD KEY `program_studi` (`program_studi`);
 
 --
 -- Indexes for table `mata_kuliah`
 --
 ALTER TABLE `mata_kuliah`
- ADD PRIMARY KEY (`kode_matkul`), ADD KEY `fakultas` (`fakultas`,`program_studi`), ADD KEY `program_studi` (`program_studi`);
+  ADD PRIMARY KEY (`kode_matkul`), ADD KEY `fakultas` (`fakultas`,`program_studi`), ADD KEY `program_studi` (`program_studi`);
 
 --
 -- Indexes for table `mengambil`
 --
 ALTER TABLE `mengambil`
- ADD UNIQUE KEY `nim_2` (`nim`,`kode_matkul`), ADD KEY `nim` (`nim`,`kode_matkul`), ADD KEY `kode_matkul` (`kode_matkul`);
+  ADD UNIQUE KEY `nim_2` (`nim`,`kode_matkul`), ADD KEY `nim` (`nim`,`kode_matkul`), ADD KEY `kode_matkul` (`kode_matkul`);
 
 --
 -- Constraints for dumped tables
