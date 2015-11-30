@@ -71,8 +71,8 @@ public class DSLtoSQL {
         /*t.setNim("13512098");
         t.setSemesterAwal(1);
         t.setNilai("A");
-        t.setSKS(3);
+        t.setSKS(3);*/
         
-        System.out.println(dslToSQL(t));*/
+        System.out.println(dslToSQL(t));
     }
 }
