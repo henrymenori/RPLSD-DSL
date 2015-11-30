@@ -106,8 +106,6 @@ public class Transkrip {
     
     private boolean isNilai(String s) {
         if(s.length() == 1) {
-            //nilai = s;
-            //return isSingleChar(s.charAt(0));
             if(isSingleChar(s.charAt(0))) {
                 nilai = s;
                 return true;
@@ -153,7 +151,7 @@ public class Transkrip {
                 return true;
             }
             else {
-                SKS = 0;
+                SKS = -1;
                 return false;
             }
         }
@@ -221,8 +219,8 @@ public class Transkrip {
                 return true;
             }
             else {
-                semesterAwal = 0;
-                semesterAkhir = 0;
+                semesterAwal = -1;
+                semesterAkhir = -1;
                 return false;
             }
         }
@@ -233,8 +231,8 @@ public class Transkrip {
                 return true;
             }
             else {
-                semesterAwal = 0;
-                semesterAkhir = 0;
+                semesterAwal = -1;
+                semesterAkhir = -1;
                 return false;
             }
         }
@@ -293,8 +291,6 @@ public class Transkrip {
     
     private boolean isNIM(String s) {
         if(s.length() == 8) {
-            //nim = s;
-            //return isNum(s);
             if(isNum(s)) {
                 nim = s;
                 return true;
