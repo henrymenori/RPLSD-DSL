@@ -9,9 +9,17 @@ package dsl;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.ResultSet;
+import java.sql.ResultSetMetaData;
+import java.sql.SQLException;
+import java.sql.Statement;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Properties;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import java.util.Arrays;
 
 /**
  *
@@ -64,15 +72,97 @@ public class DSLtoSQL {
         return ret;
     }
     
-    public static void writeToExternalFile(String query){
+    public void writeToExternalFile(String Query){
+        ArrayList<ArrayList<String>> result = new ArrayList<ArrayList<String>>();
+        ArrayList<String> arrString = new ArrayList<String>();
+        ArrayList<String> columnName = new ArrayList<String>();
+        Connection conn = null;
+        Properties connectionProps = new Properties();
+        connectionProps.put("user", "root");
+        connectionProps.put("password", "");
+        
+        Statement stmt = null;
+        ResultSet rs = null;
+        ResultSetMetaData rsmd = null; 
+
+        try {
+            conn =  DriverManager.getConnection("jdbc:mysql://localhost:3306/dsl", connectionProps);
+            
+            stmt = conn.createStatement();
+            rs = stmt.executeQuery(Query);
+            rsmd = rs.getMetaData();
+            int columnsNumber = rsmd.getColumnCount();
+            for (int i = 1; i <= columnsNumber; i++){
+                columnName.add(rsmd.getColumnName(i));
+//                System.out.println(columnName.get(i-1));
+            }
+            while(rs.next()){
+                arrString = new ArrayList<String>();
+                for (int i = 1; i <= columnsNumber; i++){
+//                    System.out.println(rs.getString(i));
+                    arrString.add(rs.getString(i));
+                }
+                result.add(arrString);
+            }
+        } catch (SQLException ex) {
+            // handle any errors
+            System.out.println("SQLException: " + ex.getMessage());
+            System.out.println("SQLState: " + ex.getSQLState());
+            System.out.println("VendorError: " + ex.getErrorCode());
+            ex.printStackTrace();
+                    
+        }
+        finally {
+            if (rs != null) {
+                try {
+                    rs.close();
+                } catch (SQLException sqlEx) { } // ignore
+                rs = null;
+            }
+            if (stmt != null) {
+                try {
+                    stmt.close();
+                } catch (SQLException sqlEx) { } // ignore
+                stmt = null;
+            }
+        }
         FileWriter fw;
         try {
             fw = new FileWriter("D:\\DSLtoSQL.html");
             PrintWriter pw = new PrintWriter(fw);
              //Write to file line by line
-            pw.println("Hello guys");
-            pw.println("Java Code Online is testing");
-            pw.println("writing to a file operation");
+            pw.println("<!DOCTYPE html>");
+            pw.println("<html>");
+            pw.println("<head>");
+            pw.println("<title>Score Finder</title>");
+            pw.println("</head>");
+            pw.println("<body>");
+            pw.println("<table dir=\"ltr\" width=\"500\" border=\"1\" summary=\"purpose/structure for speech output\">");
+            pw.println("	<caption>Berikut adalah hasil eksekusi query " + Query);
+            pw.println("	</caption>");
+            pw.println("	<colgroup width=\"50%\" />");
+            pw.println("	<colgroup id=\"colgroup\" class=\"colgroup\" align=\"center\" ");
+            pw.println("			valign=\"middle\" title=\"title\" width=\"1*\" ");
+            pw.println("			span=\"2\" style=\"background:#ddd;\" />");
+            pw.println("	<thead>");
+            pw.println("		<tr>");
+            for(int i = 0; i < columnName.size(); i++){
+                pw.println("			<th scope=\"col\">"+columnName.get(i)+"</th>");
+            }
+            pw.println("		</tr>");
+            pw.println("	</thead>");
+            pw.println("	<tbody>");
+            for(int i = 0; i < result.size(); i++){
+                pw.println("		<tr>");
+                for(int j = 0; j < result.get(i).size(); j++){
+                    pw.println("			<td>"+result.get(i).get(j)+"</td>");
+                }
+                pw.println("		</tr>");
+            }
+            pw.println("	</tbody>");            
+            pw.println("</table>");
+            pw.println("</body>");
+            pw.println("</html>");
 
             //Flush the output to the file
             pw.flush();
@@ -87,22 +177,20 @@ public class DSLtoSQL {
             }
     }
     public static void main(String argv[]){
-        Transkrip t = new Transkrip("nim:13512081 semester:2 dengan_syarat nilai:ab");
-        System.out.println(t.getNim());
-        System.out.println(t.getNilai());
-        System.out.println(t.getSKS());
-        System.out.println(t.getSemesterAwal());
-        System.out.println(t.getSemesterAkhir());
-        System.out.println(Arrays.toString(t.getKodeKuliah()));
-        System.out.println(dslToSQL(t));
+//        Transkrip t = new Transkrip("nim:13512081 semester:2 dengan_syarat nilai:ab");
+//        System.out.println(t.getNim());
+//        System.out.println(t.getNilai());
+//        System.out.println(t.getSKS());
+//        System.out.println(t.getSemesterAwal());
+//        System.out.println(t.getSemesterAkhir());
+//        System.out.println(Arrays.toString(t.getKodeKuliah()));
         /*t.setNim("13512098");
         t.setSemesterAwal(1);
         t.setNilai("A");
         t.setSKS(3);*/
-        
-
 //        System.out.println(dslToSQL(t));
-        writeToExternalFile(dslToSQL(t));
+        DSLtoSQL dts = new DSLtoSQL();
+        dts.writeToExternalFile("SELECT * FROM mahasiswa,mata_kuliah,mengambil WHERE mahasiswa.NIM='13512098' AND mahasiswa.nim=mengambil.nim AND mata_kuliah.kode_matkul=mengambil.kode_matkul");
 
     }
 }
