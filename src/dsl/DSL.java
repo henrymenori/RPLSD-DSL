@@ -5,6 +5,10 @@
  */
 package dsl;
 
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
+
 /**
  *
  * @author henry
@@ -13,10 +17,21 @@ public class DSL {
 
     // attribute
     private static String nim;
+    private static String nilai;
+    private static int semesterAwal;
+    private static int semesterAkhir;
+    private static int SKS;
+    private static List<String> kodeKuliah;
     
-    public static void main(String[] args) {        
-        System.out.println(isInput("nim:13512082 semester:2 dengan_syarat nilai:a sks:4"));
+    public static void main(String[] args) {
+        kodeKuliah = new ArrayList();
+        System.out.println(isInput("nim:13512082 semester:2-8 dengan_syarat nilai:ab"));
         System.out.println(nim);
+        System.out.println(nilai);
+        System.out.println(semesterAwal);
+        System.out.println(semesterAkhir);
+        System.out.println(SKS);
+        System.out.println(kodeKuliah.toString());
     }
     
     static public boolean isSingleNumber(char c) {
@@ -43,10 +58,28 @@ public class DSL {
     
     static public boolean isNilai(String s) {
         if(s.length() == 1) {
-            return isSingleChar(s.charAt(0));
+            //nilai = s;
+            //return isSingleChar(s.charAt(0));
+            if(isSingleChar(s.charAt(0))) {
+                nilai = s;
+                return true;
+            }
+            else {
+                nilai = null;
+                return false;
+            }
         }
         else if(s.length() == 2) {
-            return isSingleChar(s.charAt(0)) && isSingleChar(s.charAt(1));
+            //nilai = s;
+            //return isSingleChar(s.charAt(0)) && isSingleChar(s.charAt(1));
+            if(isSingleChar(s.charAt(0)) && isSingleChar(s.charAt(1))) {
+                nilai = s;
+                return true;
+            }
+            else {
+                nilai = null;
+                return false;
+            }
         }
         else {
             return false;
@@ -69,7 +102,16 @@ public class DSL {
     
     static public boolean isSKS(String s) {
         if(s.length() == 1) {
-            return isSingleNumber(s.charAt(0));
+            //SKS = Integer.parseInt(s);
+            //return isSingleNumber(s.charAt(0));
+            if(isSingleNumber(s.charAt(0))) {
+                SKS = Integer.parseInt(s);
+                return true;
+            }
+            else {
+                SKS = 0;
+                return false;
+            }
         }
         else {
             return false;
@@ -95,6 +137,7 @@ public class DSL {
             return false;
         }
         else {
+            kodeKuliah.add(s);
             return
                     isSingleChar(s.charAt(0)) &&
                     isSingleChar(s.charAt(1)) &&
@@ -102,6 +145,7 @@ public class DSL {
                     isSingleNumber(s.charAt(3)) &&
                     isSingleNumber(s.charAt(4)) &&
                     isSingleNumber(s.charAt(5));
+            
         }
     }
     
@@ -127,10 +171,33 @@ public class DSL {
     
     static public boolean isSemester(String s) {
         if(s.length() == 1) {
-            return isSingleNumber(s.charAt(0));
+            //semesterAwal = Integer.parseInt(s);
+            //return isSingleNumber(s.charAt(0));
+            if(isSingleNumber(s.charAt(0))) {
+                semesterAwal = Integer.parseInt(s);
+                semesterAkhir = Integer.parseInt(s);
+                return true;
+            }
+            else {
+                semesterAwal = 0;
+                semesterAkhir = 0;
+                return false;
+            }
         }
         else if(s.length() == 3) {
-            return isSingleNumber(s.charAt(0)) && s.charAt(1) == '-' && isSingleNumber(s.charAt(2));
+            //semesterAwal = Integer.parseInt("" + s.charAt(0));
+            //semesterAkhir = Integer.parseInt("" + s.charAt(2));
+            //return isSingleNumber(s.charAt(0)) && s.charAt(1) == '-' && isSingleNumber(s.charAt(2));
+            if(isSingleNumber(s.charAt(0)) && s.charAt(1) == '-' && isSingleNumber(s.charAt(2))) {
+                semesterAwal = Integer.parseInt("" + s.charAt(0));
+                semesterAkhir = Integer.parseInt("" + s.charAt(2));
+                return true;
+            }
+            else {
+                semesterAwal = 0;
+                semesterAkhir = 0;
+                return false;
+            }
         }
         else {
             return false;
@@ -187,8 +254,16 @@ public class DSL {
     
     static public boolean isNIM(String s) {
         if(s.length() == 8) {
-            nim = s;
-            return isNum(s);
+            //nim = s;
+            //return isNum(s);
+            if(isNum(s)) {
+                nim = s;
+                return true;
+            }
+            else {
+                nim = null;
+                return false;
+            }
         }
         else {
             return false;
