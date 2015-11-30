@@ -6,6 +6,12 @@
 
 package dsl;
 
+import java.io.FileWriter;
+import java.io.IOException;
+import java.io.PrintWriter;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+
 /**
  *
  * @author Riady
@@ -57,7 +63,28 @@ public class DSLtoSQL {
         return ret;
     }
     
-    
+    public static void writeToExternalFile(String query){
+        FileWriter fw;
+        try {
+            fw = new FileWriter("D:\\DSLtoSQL.html");
+            PrintWriter pw = new PrintWriter(fw);
+             //Write to file line by line
+            pw.println("Hello guys");
+            pw.println("Java Code Online is testing");
+            pw.println("writing to a file operation");
+
+            //Flush the output to the file
+            pw.flush();
+
+            //Close the Print Writer
+            pw.close();
+
+            //Close the File Writer
+            fw.close(); 
+            } catch (IOException ex) {
+                ex.printStackTrace();
+            }
+    }
     public static void main(String argv[]){
         Transkrip t = new Transkrip();
         t.setNim("13512098");
@@ -65,6 +92,7 @@ public class DSLtoSQL {
         t.setNilai("A");
         t.setSKS(3);
         
-        System.out.println(dslToSQL(t));
+//        System.out.println(dslToSQL(t));
+        writeToExternalFile(dslToSQL(t));
     }
 }
