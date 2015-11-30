@@ -24,14 +24,21 @@ public class DSL {
     private static List<String> kodeKuliah;
     
     public static void main(String[] args) {
-        kodeKuliah = new ArrayList();
+        /*kodeKuliah = new ArrayList();
         System.out.println(isInput("nim:13512082 semester:2-8 dengan_syarat nilai:ab"));
         System.out.println(nim);
         System.out.println(nilai);
         System.out.println(semesterAwal);
         System.out.println(semesterAkhir);
         System.out.println(SKS);
-        System.out.println(kodeKuliah.toString());
+        System.out.println(kodeKuliah.toString());*/
+        Transkrip t = new Transkrip("nim:13512081 kode_kuliah:if2121");
+        System.out.println(t.getNim());
+        System.out.println(t.getNilai());
+        System.out.println(t.getSKS());
+        System.out.println(t.getSemesterAwal());
+        System.out.println(t.getSemesterAkhir());
+        System.out.println(Arrays.toString(t.getKodeKuliah()));
     }
     
     static public boolean isSingleNumber(char c) {

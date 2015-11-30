@@ -26,7 +26,7 @@ public class Transkrip {
         kode = new ArrayList();
         if(isInput(input)) {
             System.out.println("Input benar");
-            kodeKuliah = (String[]) kode.toArray();
+            kodeKuliah = kode.toArray(new String[kode.size()]);
         }
         else {
             System.out.println("Input salah");

@@ -177,20 +177,21 @@ public class DSLtoSQL {
             }
     }
     public static void main(String argv[]){
-//        Transkrip t = new Transkrip("nim:13512081 semester:2 dengan_syarat nilai:ab");
-//        System.out.println(t.getNim());
-//        System.out.println(t.getNilai());
-//        System.out.println(t.getSKS());
-//        System.out.println(t.getSemesterAwal());
-//        System.out.println(t.getSemesterAkhir());
-//        System.out.println(Arrays.toString(t.getKodeKuliah()));
+        Transkrip t = new Transkrip("nim:13512081 semester:2 dengan_syarat nilai:ab");
+        System.out.println(t.getNim());
+        System.out.println(t.getNilai());
+        System.out.println(t.getSKS());
+        System.out.println(t.getSemesterAwal());
+        System.out.println(t.getSemesterAkhir());
+        System.out.println(Arrays.toString(t.getKodeKuliah()));
         /*t.setNim("13512098");
         t.setSemesterAwal(1);
         t.setNilai("A");
         t.setSKS(3);*/
+
 //        System.out.println(dslToSQL(t));
         DSLtoSQL dts = new DSLtoSQL();
-        dts.writeToExternalFile("SELECT * FROM mahasiswa,mata_kuliah,mengambil WHERE mahasiswa.NIM='13512098' AND mahasiswa.nim=mengambil.nim AND mata_kuliah.kode_matkul=mengambil.kode_matkul");
-
+        dts.writeToExternalFile("SELECT * FROM mahasiswa,mata_kuliah,mengambil WHERE mahasiswa.NIM='13512098' AND mahasiswa.nim=mengambil.nim AND mata_kuliah.kode_matkul=mengambil.kode_matkul");        
+        System.out.println(dslToSQL(t));
     }
 }
