@@ -32,7 +32,8 @@ public class DSLtoSQL {
         
         int sks = input.getSKS();
         String querySks = "";
-        if(sks!=-1){
+        System.out.println(sks);
+        if(sks!=0){
             querySks = "AND SKS="+sks;
         }
         
@@ -61,10 +62,10 @@ public class DSLtoSQL {
         int semesterAwal = input.getSemesterAwal();
         int semesterAkhir = input.getSemesterAkhir();
         String querySemester = "";
-        if(semesterAwal!=-1 && semesterAkhir!=-1){
+        if(semesterAwal!=0 && semesterAkhir!=0){
             querySemester = "AND mata_kuliah.semester>="+semesterAwal+" AND mata_kuliah.semester<="+semesterAkhir;
         }
-        else if(semesterAwal!=-1 && semesterAkhir==-1){
+        else if(semesterAwal!=0 && semesterAkhir==0){
             querySemester = "AND mata_kuliah.semester="+semesterAwal;
         }
         
@@ -99,8 +100,8 @@ public class DSLtoSQL {
             while(rs.next()){
                 arrString = new ArrayList<String>();
                 for (int i = 1; i <= columnsNumber; i++){
-                    System.out.println(rs.getString(i));
-//                    arrString.add(rs.getString(i));
+//                    System.out.println(rs.getString(i));
+                    arrString.add(rs.getString(i));
                 }
                 result.add(arrString);
             }
@@ -219,7 +220,7 @@ public class DSLtoSQL {
         }
     }
     public static void main(String argv[]){
-        Transkrip t = new Transkrip("nim:13512098 semester:2 dengan_syarat nilai:ab");
+        Transkrip t = new Transkrip("nim:13512098");
 //        System.out.println(t.getNim());
 //        System.out.println(t.getNilai());
 //        System.out.println(t.getSKS());
