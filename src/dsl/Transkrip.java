@@ -1,9 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
-
 package dsl;
 
 import java.util.ArrayList;
@@ -81,15 +75,17 @@ public class Transkrip {
         this.kodeKuliah = kodeKuliah;
     }
     
-    // method
+    // Fungsi yang mengembalikan nilai true apabila input yang dimasukkan oleh user adalah angka dengan panjang 1 karakter. 
     private boolean isSingleNumber(char c) {
         return (c - '0' <= 9 && c - '0' >= 0);
     }
     
+    // Fungsi yang mengembalikan nilai true apabila input yang dimasukkan oleh user adalah karakter dengan panjang 1 karakter. 
     private boolean isSingleChar(char c) {
         return (c - 'a' <= 25 && c - 'a' >= 0);
     }
     
+    // Fungsi yang mengembalikan nilai true apabila input yang dimasukkan oleh user adalah angka.
     private boolean isNum(String s) {
         if(s.isEmpty()) {
             return false;
@@ -104,6 +100,8 @@ public class Transkrip {
         }
     }
     
+    // Fungsi yang mengembalikan nilai true apabila input yang dimasukkan oleh user adalah nilai yang valid.
+    // Nilai yang valid adalah nilai yang dibentuk oleh karakter dengan panjang 1 atau 2.
     private boolean isNilai(String s) {
         if(s.length() == 1) {
             if(isSingleChar(s.charAt(0))) {
@@ -130,6 +128,8 @@ public class Transkrip {
         }
     }
     
+    // Fungsi yang mengembalikan nilai true apabila input yang dimasukkan oleh user sesuai dengan format DSL yang sudah didefinisikan.
+    // Contoh input yang valid: "nilai:a", "nilai:ab".
     private boolean isInputNilai(String s) {
         if(s.length() < 6) {
             return false;
@@ -144,6 +144,8 @@ public class Transkrip {
         }
     }
     
+    // Fungsi yang mengembalikan nilai true apabila input yang dimasukkan oleh user adalah SKS yang valid.
+    // SKS yang valid adalah SKS yang dibentuk oleh karakter dengan panjang tepat 1 karakter dan berupa angka.
     private boolean isSKS(String s) {
         if(s.length() == 1) {
             if(isSingleNumber(s.charAt(0))) {
@@ -160,6 +162,8 @@ public class Transkrip {
         }
     }
     
+    // Fungsi yang mengembalikan nilai true apabila input yang dimasukkan oleh user sesuai dengan format DSL yang sudah didefinisikan.
+    // Contoh input yang valid: "SKS:1", "SKS:2".
     private boolean isInputSKS(String s) {
         if(s.length() < 4) {
             return false;
@@ -174,6 +178,8 @@ public class Transkrip {
         }
     }
     
+    // Fungsi yang mengembalikan nilai true apabila input yang dimasukkan oleh user adalah kode kuliah yang valid.
+    // Kode kuliah yang valid adalah kode kuliah yang dibentuk oleh karakter dengan panjang tepat 6 karakter.
     private boolean isKodeKuliah(String s) {
         if(s.length() != 6) {
             return false;
@@ -187,10 +193,11 @@ public class Transkrip {
                     isSingleNumber(s.charAt(3)) &&
                     isSingleNumber(s.charAt(4)) &&
                     isSingleNumber(s.charAt(5));
-            
         }
     }
     
+    // Fungsi yang mengembalikan nilai true apabila input yang dimasukkan oleh user sesuai dengan format DSL yang sudah didefinisikan.
+    // Contoh input yang valid: "kode_kuliah:IF1111", "kode_kuliah:IF1111 kode_kuliah:IF2222 kode_kuliah:IF3333".
     private boolean isInputKodeKuliah(String s) {
         if(s.length() < 12) {
             return false;
@@ -211,6 +218,8 @@ public class Transkrip {
         }
     }
     
+    // Fungsi yang mengembalikan nilai true apabila input yang dimasukkan oleh user adalah semester yang valid.
+    // Semester yang valid adalah semester yang dibentuk oleh karakter dengan panjang tepat 1 karakter atau tepat 3 karakter.
     private boolean isSemester(String s) {
         if(s.length() == 1) {
             if(isSingleNumber(s.charAt(0))) {
@@ -241,6 +250,8 @@ public class Transkrip {
         }
     }
     
+    // Fungsi yang mengembalikan nilai true apabila input yang dimasukkan oleh user sesuai dengan format DSL yang sudah didefinisikan.
+    // Contoh input yang valid: "semester:1", "semester:1-7".
     private boolean isInputSemester(String s) {
         if(s.length() < 9) {
             return false;
@@ -255,6 +266,7 @@ public class Transkrip {
         }
     }
     
+    // Fungsi yang mengembalikan nilai true apabila input yang dimasukkan oleh user adalah syarat yang valid.
     private boolean isSyarat(String s) {
         int indexOf = s.indexOf(" ");
         if(indexOf == -1) {
@@ -265,6 +277,8 @@ public class Transkrip {
         }
     }
     
+    // Fungsi yang mengembalikan nilai true apabila input yang dimasukkan oleh user sesuai dengan format DSL yang sudah didefinisikan.
+    // Contoh input yang valid: "dengan_syarat nilai:a", "dengan_syarat: SKS:3", "dengan_syarat nilai:a SKS:3".
     private boolean isInputSyarat(String s) {
         if(s.length() < 14) {
             return false;
@@ -279,6 +293,9 @@ public class Transkrip {
         }
     }
     
+    // Fungsi yang mengembalikan nilai true apabila input yang dimasukkan oleh user adalah query yang valid.
+    // Query yang valid terletak setelah "nim:" dan query berupa "semester:" atau "kode_kuliah;" atau "dengan_syarat:"
+    // Perhatikan penjelasan fungsi isInputSyarat.
     private boolean isA(String s) {
         int indexOf = s.indexOf(" ");
         if(indexOf == -1) {
@@ -289,6 +306,8 @@ public class Transkrip {
         }
     }
     
+    // Fungsi yang mengembalikan nilai true apabila input yang dimasukkan oleh user adalah NIM yang valid.
+    // NIM yang valid adalah NIM yang dibentuk oleh karakter dengan panjang tepat 8 karakter.
     private boolean isNIM(String s) {
         if(s.length() == 8) {
             if(isNum(s)) {
